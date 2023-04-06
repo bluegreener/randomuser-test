@@ -9,6 +9,7 @@ test('page updates on interaction with data items with correct data', async ({ p
   await landingPage.goto(true);
   
   for (const item of await landingPage.valueButtons.getByRole('listitem').all()) {
+    // determine if run is mobile or desktop
     if(workerInfo.project.name.includes('Mobile')) {
         // click UI control on mobile
         await item.click();

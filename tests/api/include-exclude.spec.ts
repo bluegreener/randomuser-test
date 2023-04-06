@@ -1,24 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { inclExclOptions } from './util/constants';
 
 test('should exclude the correct fields when requested', async ({ request }) => {
-    
-    const options: string[] = [
-        'gender',
-        'name',
-        'location',
-        'email',
-        'login',
-        'registered',
-        'dob',
-        'phone',
-        'cell',
-        'id',
-        'picture',
-        'nat',
-    ];
-
-    for(const option of options) {
-        const result = await request.get('./api/', { params: { 'excl': option } });
+    for(const option of inclExclOptions) {
+        const result = await request.get('./api/', { params: { 'exc': option } });
         expect(result.ok()).toBeTruthy();
         expect(await result.json()).not.toHaveProperty(option);
     }
