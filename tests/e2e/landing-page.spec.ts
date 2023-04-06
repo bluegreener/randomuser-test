@@ -1,18 +1,28 @@
 import { test, expect } from '@playwright/test';
+import { LandingPage } from '../../pages/landing-page';
 
-test('page updates on hover of data items with correct data', async ({ page }) => {
-  await page.goto('./');
-
-  // wait for API call to finish and page to populate
-  await expect(page.locator('css=#user_value')).not.toHaveText('...', { timeout: 10000 });
+test('page updates on interaction with data items with correct data', async ({ page }, workerInfo) => {
   
-  for (const item of await page.locator('css=#values_list').getByRole('listitem').all()) {
-    // hover over UI control
-    await item.hover();
-    // capture data value
+  const landingPage = new LandingPage(page);
+
+  // wait for page to populate
+  await landingPage.goto(true);
+  
+  for (const item of await landingPage.valueButtons.getByRole('listitem').all()) {
+    if(workerInfo.project.name.includes('Mobile')) {
+        // click UI control on mobile
+        await item.click();
+    } else {
+        // hover over UI control on desktop
+        await item.hover();
+    }
+    
+    // capture title and value
+    const expectedTitle = await item.getAttribute('data-title') + "";
     const expectedValue = await item.getAttribute('data-value') + "";
     // compare to UI display
-    await expect(await page.locator('css=#user_value')).toHaveText(expectedValue);
+    await expect(landingPage.displayedValueTitle).toHaveText(expectedTitle);
+    await expect(landingPage.displayedValue).toHaveText(expectedValue);
   }
   
 });
