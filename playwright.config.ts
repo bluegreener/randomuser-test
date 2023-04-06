@@ -28,27 +28,38 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testIgnore: '**/tests/api/**',
     },
 
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      testIgnore: '**/tests/api/**',
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+      testIgnore: '**/tests/api/**',
     },
-
     /* Test against mobile viewports. */
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
+      testIgnore: '**/tests/api/**',
     },
+
     {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
+      testIgnore: '**/tests/api/**',
     },
+    /* Project for just API tests */
+    {
+      name: 'API',
+      use: { ...devices['Desktop Chrome'] },  // still requires a browser context :shrug:
+      testMatch: '**/tests/api/**',
+    }
   ],
 
 });

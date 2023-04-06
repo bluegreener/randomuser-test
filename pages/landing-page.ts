@@ -37,7 +37,7 @@ export class LandingPage {
     async goto(waitForDataLoad?: boolean) {
         this.page.goto('./');
         if(waitForDataLoad) {
-            await expect(this.displayedValue).not.toHaveText('...', { timeout: 10000 });
+            await expect(this.displayedValue).not.toHaveText('...', { timeout: 15000 });
         }
     }
 

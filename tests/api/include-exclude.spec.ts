@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { inclExclOptions } from './util/constants';
+import { inclExclOptions } from '../../util/constants';
 
 test('should exclude the correct fields when requested', async ({ request }) => {
     for(const option of inclExclOptions) {

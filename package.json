@@ -1,11 +1,14 @@
 {
   "name": "randomuser-test",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tests on randomuser.me for assessment",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "playwright:e2e": "npx playwright test tests/e2e",
+    "playwright:api": "npx playwright test --project=API"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Daniel Hobbes",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.32.2"
